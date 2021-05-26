@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es5",
+    "module": "commonjs",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@typijs/api": [
+        "../cms-api/dist"
+      ],
+      "@typijs/api/*": [
+        "../cms-api/dist/*"
+      ],
+      "*": [
+        "node_modules/*"
+      ]
+    }
+  },
+  "exclude": [
+    "./dist"
+  ]
+}

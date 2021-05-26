@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "logs\\.d2712d1b18001249cdabb5c6bd59393a6c9c85fc-audit.json",
+    "files": [
+        {
+            "date": 1622025853168,
+            "name": "logs\\typijs.2021-05-26.log",
+            "hash": "f69dc05f5dbc37de15cf8c27a33eca32"
+        }
+    ]
+}

@@ -1,17 +1,16 @@
-import { ContentLoader, PageData, SiteDefinition } from '@typijs/core';
 import { DOCUMENT } from '@angular/common';
-import { Component, ViewEncapsulation, OnInit, AfterViewInit, Renderer2, Inject } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ContentLoader, SiteDefinition } from '@typijs/core';
 import { Observable } from 'rxjs';
-import { map, publishReplay, refCount, switchMap } from 'rxjs/operators';
-
 import { StartPage } from '../../pages/start-page/start-page.pagetype';
+
 
 @Component({
     templateUrl: './layout.component.html',
     encapsulation: ViewEncapsulation.None
 })
 export class LayoutComponent implements OnInit {
-    startPage$: Observable<StartPage> | undefined;
+    startPage$: Observable<StartPage>;
 
     constructor(
         private siteDefinition: SiteDefinition,

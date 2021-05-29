@@ -72,4 +72,4 @@ jobs:
         with:
             app-name: typijs
             publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-            package: '.'
+            package: './server'

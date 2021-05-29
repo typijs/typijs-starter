@@ -8,7 +8,7 @@
     "postbuild": "npm run copy-env",
     "copy-env": "cpx \"*.env\" \"dist\"",
     "serve": "node dist/server.js",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "node dist/server.js",
     "watch-ts": "tsc -w",
     "watch-node": "nodemon --inspect --watch dist dist/server.js",
     "predev": "npm run build",

@@ -1,4 +1,4 @@
-name: Deploy cms demo
+name: Deploy
 
 on: 
   push:

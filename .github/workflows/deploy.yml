@@ -9,12 +9,12 @@ env:
 
 jobs:
   cms-deploy:
-    if: "!contains(github.event.head_commit.message, 'skip cms')"
-    name: Deploy Angular To Github Page
+    if: "!contains(github.event.head_commit.message, 'skip client')"
+    name: Deploy Client To Github Page
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./cms
+        working-directory: ./client
 
     steps:
       - uses: actions/checkout@v2
@@ -38,21 +38,20 @@ jobs:
 
       - name: Build packages
         run: |
-          npm run build:libs
           npm run build -- --prod
 
       - name: Deploy packages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npm run deploy -- --no-silent --cname=demo.typijs.com
+        run: npm run deploy -- --no-silent --cname=starter.typijs.com
 
   api-deploy:
-    if: "!contains(github.event.head_commit.message, 'skip api')"
-    name: Deploy Node Api To Azure
+    if: "!contains(github.event.head_commit.message, 'skip server')"
+    name: Deploy Server To Azure
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: ./cms-server
+    defaults:
+      run:
+        working-directory: ./server
         
     steps:
       - uses: actions/checkout@v2
@@ -61,22 +60,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install dependencies in cms-api
-        working-directory: ./cms-api
-        run: npm ci
-        
-      - name: Build packages in cms-api
-        working-directory: ./cms-api
-        run: |
-          npm run build
       
-      - name: Install dependencies in cms-server
-        working-directory: ./cms-server
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build packages in cms-server
-        working-directory: ./cms-server
+      - name: Build packages
         run: npm run build
 
       - name: "Deploy to Azure WebApp"
@@ -84,4 +72,4 @@ jobs:
         with:
             app-name: typijs
             publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-            package: './cms-server'
+            package: '.'

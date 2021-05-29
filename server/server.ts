@@ -2,21 +2,20 @@ import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
 import * as express from 'express';
-import { Logger, TypiJs, CmsStorageEngine, ImgurStorageEngine, Container } from '@typijs/api';
+import { Logger, TypiJs, CmsStorageEngine, ImgurStorageEngine, Container, ConfigManager } from '@typijs/api';
 import { config } from './config';
 
 
 export class ExpressServer {
     public express: express.Application;
-    public typiJs: TypiJs;
 
     constructor() {
         this.express = express();
-        this.typiJs = new TypiJs(this.express, config);
+        this.setDefaultMiddlewares();
 
-        this.setMiddlewares();
-        this.setRoutes();
-        this.setErrorHandling();
+        const typiJs = new TypiJs(this.express, config);
+        this.setRoutes(typiJs);
+        this.setErrorHandling(typiJs);
     }
 
     public start(): Promise<any> {
@@ -31,7 +30,7 @@ export class ExpressServer {
         });
     }
 
-    private setMiddlewares(): void {
+    private setDefaultMiddlewares(): void {
 
         //enable CORS - Cross Origin Resource Sharing
         //https://expressjs.com/en/resources/middleware/cors.html
@@ -47,16 +46,24 @@ export class ExpressServer {
         //this.express.use(helmet());
     }
 
-    private setRoutes(): void {
-        this.express.use('/api', this.typiJs.apiRouter);
+    private setRoutes(typiJs: TypiJs): void {
+        this.express.use('/api', typiJs.apiRouter);
+        // for debug. Should remote this router on production
+        this.express.get('/configs', function (req, res) {
+            res.send({
+                env: ConfigManager.getEnv(),
+                config: ConfigManager.getConfig()
+            })
+        })
+
     }
 
-    private setErrorHandling(): void {
-        this.express.use(this.typiJs.errorHandler)
+    private setErrorHandling(typiJs: TypiJs): void {
+        this.express.use(typiJs.errorHandler)
     }
 }
 
-const expressServer = new ExpressServer();
-expressServer.start()
+const expressApp = new ExpressServer();
+expressApp.start()
     .then(() => { console.log('Server started successfully!'); })
     .catch((err) => { console.error(err); })

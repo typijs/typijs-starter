@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,9 +19,9 @@
     "@angular/platform-browser": "~11.2.6",
     "@angular/platform-browser-dynamic": "~11.2.6",
     "@angular/router": "~11.2.6",
-    "@typijs/core": "^1.0.0-beta.4",
-    "@typijs/modules": "^1.0.0-beta.4",
-    "@typijs/portal": "^1.0.0-beta.4",
+    "@typijs/core": "^1.0.0-beta.5",
+    "@typijs/modules": "^1.0.0-beta.5",
+    "@typijs/portal": "^1.0.0-beta.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "ng deploy --repo=https://github.com/typijs/typijs-starter.git --name=\"TypiJS Team\" --email=team@typijs.com",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

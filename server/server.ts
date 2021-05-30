@@ -48,14 +48,6 @@ export class ExpressServer {
 
     private setRoutes(typiJs: TypiJs): void {
         this.express.use('/api', typiJs.apiRouter);
-        // for debug. Should remote this router on production
-        this.express.get('/configs', function (req, res) {
-            res.send({
-                env: ConfigManager.getEnv(),
-                config: ConfigManager.getConfig()
-            })
-        })
-
     }
 
     private setErrorHandling(typiJs: TypiJs): void {

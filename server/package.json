@@ -16,7 +16,7 @@
   },
   "author": "danghung1202@gmail.com",
   "dependencies": {
-    "@typijs/api": "^1.0.0-beta.5",
+    "@typijs/api": "^1.0.0-beta.6",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
